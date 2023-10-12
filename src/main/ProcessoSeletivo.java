@@ -11,12 +11,15 @@ public class ProcessoSeletivo {
 	static double salaryCandidate;
 	static String nameCandidate;
 	static String continueProcess = "S";
+	static List<Candidato> listCandidateSelected = new ArrayList<Candidato>();
+	
 
 	public static void main(String[] args) {
 		
 		// TODO Auto-generated method stub
 		Scanner scan = new Scanner(System.in);
 		List<Candidato> listCandidate = new ArrayList<Candidato>();
+		
 		try {
 			
 			do {
@@ -41,6 +44,7 @@ public class ProcessoSeletivo {
 			for (Candidato candidate:listCandidate) {
 				answerCandidate(candidate);
 			}
+			printListCandidateSelected();
 		} catch(InputMismatchException e) {
 			System.out.println("Os dados inseridos estão incorretos!");
 			System.out.println("Prencha salário assim: 1000.00");
@@ -53,12 +57,25 @@ public class ProcessoSeletivo {
 		System.out.println(candidate.toString());
 		if (2000 > candidate.getIntendedSalary()) {
 			System.out.println("TELL TO CANDIDATE.");
+			listCandidateSelected.add(candidate);
 		} else if (2000 == candidate.getIntendedSalary()) {
 			System.out.println("TELL TO CANDIDATE WITH COUNTER PROPOSAL.");
+			listCandidateSelected.add(candidate);
 		} else {			
 			System.out.println("WAITING ANSWER OTHER CANDIDATES");
 		}
 		System.out.println();
+	}
+	
+	private static void printListCandidateSelected() {
+		if (listCandidateSelected.toArray().length > 0) {
+			System.out.println("Lista de candidatos selecionados para entrevista: ");
+			for (Candidato candidate:listCandidateSelected) {
+				System.out.println(candidate.toString());
+			}
+		} else {
+			System.out.println("Não há candidatos selecionados!");
+		}
 	}
 
 }
